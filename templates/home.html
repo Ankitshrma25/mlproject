@@ -3,104 +3,167 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Student Exam Performance Prediction</title>
+    <title>Student Performance Prediction</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        /* Custom Animation for Background */
+        @keyframes gradient-xy {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .animate-gradient {
+            background-size: 200% 200%;
+            animation: gradient-xy 15s ease infinite;
+        }
+        /* Fade In Animation */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
-    <div class="bg-white shadow-2xl rounded-2xl p-10 w-full max-w-3xl my-10">
+<body class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 animate-gradient min-h-screen flex items-center justify-center p-4">
 
-        <h1 class="text-3xl font-bold text-gray-800 text-center mb-6">
-            Student Performance Indicator
-        </h1>
-        <p class="text-gray-500 text-center mb-8">
-            Fill out the form below to estimate the student’s Math score.
-        </p>
+    <div class="fade-in-up bg-white/90 backdrop-blur-md shadow-2xl rounded-3xl p-8 md:p-12 w-full max-w-4xl border border-white/20 relative overflow-hidden">
+        
+        <div class="absolute -top-10 -left-10 w-40 h-40 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
 
-        <form action="{{ url_for('predict_datapoint')}}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="relative z-10 text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-pink-600 mb-4">
+                Student Performance
+            </h1>
+            <p class="text-gray-600 text-lg">
+                Unlock the potential. Predict the Math Score based on key indicators.
+            </p>
+        </div>
 
-            <div>
-                <label class="font-semibold text-gray-700">Gender</label>
-                <select name="gender" class="w-full p-3 border rounded-lg focus:ring focus:ring-indigo-300" required>
-                    <option value="" disabled selected>Select Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
+        <form action="{{ url_for('predict_datapoint')}}" method="POST" class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <div class="group">
+                <label class="block text-sm font-bold text-gray-700 mb-2 group-hover:text-indigo-600 transition-colors">Gender</label>
+                <div class="relative">
+                    <select name="gender" class="w-full bg-gray-50 text-gray-800 border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all appearance-none cursor-pointer" required>
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    </div>
+                </div>
             </div>
 
-            <div>
-                <label class="font-semibold text-gray-700">Race or Ethnicity</label>
-                <select name="ethnicity" class="w-full p-3 border rounded-lg focus:ring focus:ring-indigo-300" required>
-                    <option value="" disabled selected>Select Ethnicity</option>
-                    <option value="group A">Group A</option>
-                    <option value="group B">Group B</option>
-                    <option value="group C">Group C</option>
-                    <option value="group D">Group D</option>
-                    <option value="group E">Group E</option>
-                </select>
+            <div class="group">
+                <label class="block text-sm font-bold text-gray-700 mb-2 group-hover:text-indigo-600 transition-colors">Race / Ethnicity</label>
+                <div class="relative">
+                    <select name="ethnicity" class="w-full bg-gray-50 text-gray-800 border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all appearance-none cursor-pointer" required>
+                        <option value="" disabled selected>Select Group</option>
+                        <option value="group A">Group A</option>
+                        <option value="group B">Group B</option>
+                        <option value="group C">Group C</option>
+                        <option value="group D">Group D</option>
+                        <option value="group E">Group E</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    </div>
+                </div>
             </div>
 
-            <div>
-                <label class="font-semibold text-gray-700">Parental Level of Education</label>
-                <select name="parental_level_of_education" class="w-full p-3 border rounded-lg focus:ring focus:ring-indigo-300" required>
-                    <option value="" disabled selected>Select Education</option>
-                    <option value="associate's degree">Associate's Degree</option>
-                    <option value="bachelor's degree">Bachelor's Degree</option>
-                    <option value="high school">High School</option>
-                    <option value="master's degree">Master's Degree</option>
-                    <option value="some college">Some College</option>
-                    <option value="some high school">Some High School</option>
-                </select>
+            <div class="group">
+                <label class="block text-sm font-bold text-gray-700 mb-2 group-hover:text-indigo-600 transition-colors">Parental Education</label>
+                <div class="relative">
+                    <select name="parental_level_of_education" class="w-full bg-gray-50 text-gray-800 border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all appearance-none cursor-pointer" required>
+                        <option value="" disabled selected>Select Education Level</option>
+                        <option value="associate's degree">Associate's Degree</option>
+                        <option value="bachelor's degree">Bachelor's Degree</option>
+                        <option value="high school">High School</option>
+                        <option value="master's degree">Master's Degree</option>
+                        <option value="some college">Some College</option>
+                        <option value="some high school">Some High School</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    </div>
+                </div>
             </div>
 
-            <div>
-                <label class="font-semibold text-gray-700">Lunch Type</label>
-                <select name="lunch" class="w-full p-3 border rounded-lg focus:ring focus:ring-indigo-300" required>
-                    <option value="" disabled selected>Select Lunch</option>
-                    <option value="free/reduced">Free/Reduced</option>
-                    <option value="standard">Standard</option>
-                </select>
+            <div class="group">
+                <label class="block text-sm font-bold text-gray-700 mb-2 group-hover:text-indigo-600 transition-colors">Lunch Type</label>
+                <div class="relative">
+                    <select name="lunch" class="w-full bg-gray-50 text-gray-800 border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all appearance-none cursor-pointer" required>
+                        <option value="" disabled selected>Select Lunch</option>
+                        <option value="free/reduced">Free/Reduced</option>
+                        <option value="standard">Standard</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    </div>
+                </div>
             </div>
 
-            <div>
-                <label class="font-semibold text-gray-700">Test Preparation Course</label>
-                <select name="test_preparation_course" class="w-full p-3 border rounded-lg focus:ring focus:ring-indigo-300" required>
-                    <option value="" disabled selected>Select Course Status</option>
-                    <option value="none">None</option>
-                    <option value="completed">Completed</option>
-                </select>
+            <div class="group md:col-span-2">
+                <label class="block text-sm font-bold text-gray-700 mb-2 group-hover:text-indigo-600 transition-colors">Test Preparation Course</label>
+                <div class="relative">
+                    <select name="test_preparation_course" class="w-full bg-gray-50 text-gray-800 border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all appearance-none cursor-pointer" required>
+                        <option value="" disabled selected>Select Course Status</option>
+                        <option value="none">None</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    </div>
+                </div>
             </div>
 
-            <div>
-                <label class="font-semibold text-gray-700">Reading Score (0-100)</label>
-                <input type="number" name="writing_score" min="0" max="100" placeholder="Enter score" required
-                    class="w-full p-3 border rounded-lg focus:ring focus:ring-indigo-300" />
+            <div class="group">
+                <label class="block text-sm font-bold text-gray-700 mb-2 group-hover:text-indigo-600 transition-colors">Reading Score (0-100)</label>
+                <input type="number" name="writing_score" min="0" max="100" placeholder="e.g. 75" required
+                    class="w-full bg-gray-50 text-gray-800 border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all placeholder-gray-400" />
             </div>
 
-            <div>
-                <label class="font-semibold text-gray-700">Writing Score (0-100)</label>
-                <input type="number" name="reading_score" min="0" max="100" placeholder="Enter score" required
-                    class="w-full p-3 border rounded-lg focus:ring focus:ring-indigo-300" />
+            <div class="group">
+                <label class="block text-sm font-bold text-gray-700 mb-2 group-hover:text-indigo-600 transition-colors">Writing Score (0-100)</label>
+                <input type="number" name="reading_score" min="0" max="100" placeholder="e.g. 80" required
+                    class="w-full bg-gray-50 text-gray-800 border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 transition-all placeholder-gray-400" />
             </div>
 
-            <div class="md:col-span-2 mt-6 flex justify-center">
+            <div class="md:col-span-2 mt-8">
                 <button type="submit"
-                    class="w-full md:w-1/2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg text-lg shadow-lg transition duration-300">
-                    Predict Math Score
+                    class="w-full bg-gradient-to-r from-indigo-600 to-pink-600 text-white font-bold py-4 rounded-xl text-lg shadow-lg hover:shadow-2xl hover:scale-[1.02] transform transition-all duration-300">
+                    ✨ Predict Math Score
                 </button>
             </div>
         </form>
 
         {% if results %}
-        <div class="mt-8 p-6 bg-green-50 border-l-4 border-green-500 rounded-r-lg shadow-md text-center animate-pulse">
-            <h2 class="text-2xl font-bold text-green-800">
-                The prediction is: {{ results }}
-            </h2>
+        <div class="relative z-10 mt-10 p-1 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-pulse">
+            <div class="bg-white rounded-xl p-8 text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Prediction Complete!</h2>
+                <p class="text-gray-500 text-lg">Estimated Math Score:</p>
+                <div class="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-pink-600 mt-4">
+                    {{ results }}
+                </div>
+            </div>
         </div>
         {% endif %}
 
-        <div class="text-center mt-8">
-            <a href="/" class="text-indigo-500 hover:underline font-medium">Back to Home</a>
+        <div class="relative z-10 text-center mt-8">
+            <a href="/" class="inline-flex items-center text-indigo-500 hover:text-indigo-700 font-semibold transition-colors">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                Back to Home
+            </a>
         </div>
 
     </div>
